@@ -1,2 +1,2 @@
 # WEB
-https://xander-pro.github.io/
+https://dev-xan.github.io/
