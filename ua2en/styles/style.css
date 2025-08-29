@@ -1,78 +1,216 @@
-* {
-    font-family: 'Times New Roman', Times, serif;
-    transition: 0.5s;
-    padding: 0;
-}
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
 
-html {
-    width: 100%;
-    margin: auto;
-}
+ body {
+     background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+     color: #333;
+     min-height: 100vh;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     padding: 20px;
+ }
 
-body {
-    width: 96%;
-    min-width: 240px;
-    max-width: 1366px;
-    height: 90%;
-    margin: auto;
-}
+ .container {
+     width: 100%;
+     max-width: 900px;
+     background: white;
+     border-radius: 15px;
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+     overflow: hidden;
+     margin-top: 20px;
+ }
 
-header {
-    width: 100%;
-    text-align: center;
-}
+ /* Шапка */
+ header {
+     background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+     color: white;
+     padding: 20px 30px;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     flex-wrap: wrap;
+ }
 
-main textarea {
-    font-size: 1.2em;
-    margin: auto;
-    overflow: auto;
-    width: calc(100% - 2.4em);
-    height: 30vh;
-    resize: none;
-    padding: 1em;
-}
+ .logo {
+     display: flex;
+     align-items: center;
+     gap: 15px;
+ }
 
-footer {
-    text-align: center;
-}
+ .logo-icon {
+     font-size: 28px;
+     color: #ffce54;
+ }
 
-footer a{
-    text-align: center;
-    text-decoration: none;
-}
+ .logo-text {
+     font-size: 22px;
+     font-weight: 700;
+ }
 
-footer a:hover {
-    font-size: 1.4em;
-}
+ .home-btn {
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
+     padding: 10px 20px;
+     background: rgba(255, 255, 255, 0.2);
+     color: white;
+     text-decoration: none;
+     border-radius: 50px;
+     font-weight: 600;
+     transition: all 0.3s ease;
+     backdrop-filter: blur(5px);
+     border: 1px solid rgba(255, 255, 255, 0.3);
+ }
 
-@media (prefers-color-scheme: dark) {
-    html {
-        background-color: black;
-        color: rgb(163, 163, 163);
-    }
+ .home-btn:hover {
+     background: rgba(255, 255, 255, 0.3);
+     transform: translateY(-2px);
+     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+ }
 
-    textarea {
-        background-color: black;
-        color: white;
-    }
+ main {
+     padding: 30px;
+ }
 
-    footer a{
-        color: rgb(163, 163, 163);
-    }
-}
+ .transliteration-area {
+     display: flex;
+     flex-direction: column;
+     gap: 20px;
+ }
 
-@media (prefers-color-scheme: light) {
-    html {
-        background-color: white;
-        color: black;
-    }
+ .input-section,
+ .output-section {
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+ }
 
-    textarea {
-        background-color: white;
-        color: black;
-    }
+ textarea {
+     width: 100%;
+     min-height: 180px;
+     padding: 15px;
+     border: 2px solid #e0e0e0;
+     border-radius: 10px;
+     font-size: 1.8em;
+     resize: vertical;
+     transition: border-color 0.3s;
+ }
 
-    footer a{
-        color: black;
-    }
-}
+ textarea:focus {
+     outline: none;
+     border-color: #4b6cb7;
+ }
+
+ #intext {
+     background: #f9f9f9;
+ }
+
+ #outtext {
+     background: #f0f4ff;
+ }
+
+ .label {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     font-weight: 600;
+     color: #4b6cb7;
+ }
+
+ .label-icon {
+     width: 24px;
+     height: 24px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background: #4b6cb7;
+     color: white;
+     border-radius: 50%;
+     font-size: 14px;
+ }
+
+ .info {
+     background: #e8f4ff;
+     border-radius: 10px;
+     padding: 20px;
+     margin-top: 25px;
+ }
+
+ .info h3 {
+     color: #2c5282;
+     margin-bottom: 10px;
+     display: flex;
+     align-items: center;
+     gap: 10px;
+ }
+
+ .info ul {
+     list-style: none;
+     padding-left: 5px;
+ }
+
+ .info li {
+     margin-bottom: 8px;
+     display: flex;
+     align-items: center;
+     gap: 10px;
+ }
+
+ .info li:before {
+     content: "•";
+     color: #4b6cb7;
+     font-weight: bold;
+ }
+
+ footer {
+     text-align: center;
+     padding: 20px;
+     margin-top: 20px;
+     color: white;
+     font-weight: 500;
+ }
+
+ footer a {
+     color: #ffce54;
+     text-decoration: none;
+ }
+
+ footer a:hover {
+     text-decoration: underline;
+ }
+
+ @media (max-width: 768px) {
+     header {
+         flex-direction: column;
+         text-align: center;
+         gap: 15px;
+     }
+
+     .logo {
+         justify-content: center;
+     }
+
+     textarea {
+         min-height: 150px;
+     }
+ }
+
+ @media (max-width: 480px) {
+     .logo-text {
+         font-size: 18px;
+     }
+
+     .home-btn {
+         padding: 8px 16px;
+         font-size: 14px;
+     }
+
+     main {
+         padding: 20px;
+     }
+ }

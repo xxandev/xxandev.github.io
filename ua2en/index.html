@@ -11,15 +11,48 @@
 </head>
 
 <body>
-    <header>
-        <h1>Транслітерація тексту з української на англійську</h1>
-    </header>
-    <main>
-        <textarea name="intext" id="intext" placeholder="Текст до транслітерації" oninput="transliterate()"></textarea>
-        <textarea name="outtext" id="outtext" cols="300" rows="10" placeholder="Текст після транслітерації" readonly></textarea>
-    </main>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">UA→EN</div>
+                <div class="logo-text">Транслітерація тексту з української на англійську</div>
+            </div>
+            <a href="/" class="home-btn"><span class="home-icon">⌂</span>Home</a>
+        </header>
+
+        <main>
+            <div class="transliteration-area">
+                <div class="input-section">
+                    <div class="label">
+                        <div class="label-icon">T</div>
+                        <span>Введіть текст українською:</span>
+                    </div>
+                    <textarea id="intext" placeholder="Введіть текст для транслітерації..." oninput="transliterate()"></textarea>
+                </div>
+
+                <div class="output-section">
+                    <div class="label">
+                        <div class="label-icon">R</div>
+                        <span>Результат транслітерації:</span>
+                    </div>
+                    <textarea id="outtext" placeholder="Тут з'явиться результат..." readonly></textarea>
+                </div>
+            </div>
+
+            <div class="info">
+                <h3><div class="label-icon">i</div>Як це працює?</h3>
+                <ul>
+                    <li>Введіть текст українською мовою у верхнє поле</li>
+                    <li>Транслітерація відбувається автоматично в реальному часі</li>
+                    <li>Результат з'являється у нижньому полі</li>
+                    <li>Транслітеровані тексти можна копіювати для подальшого використання</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
     <footer>
-        <a href="/">go home</a>
+        <p><a href="/">Go Home</a></p>
     </footer>
 </body>
 

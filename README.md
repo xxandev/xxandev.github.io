@@ -1,2 +1,2 @@
 # WEB
-https://dev-xan.github.io/
+https://xxandev.github.io

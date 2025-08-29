@@ -1,16 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="styles/logo/logo-mini.png" />
     <link rel="stylesheet" href="styles/menu.css">
-    <title>Menu</title>
+    <script src="js/menu.js"></script>
+    <title>XXanDev - Projects Menu</title>
 </head>
 
 <body>
-    <p>menu will be here :)</p>
+    <section class="showcase">
+        <video src="styles/background/background_1.mp4" muted loop autoplay></video>
+        <div class="overlay"></div>
+
+        <a href="/" class="back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            На головну
+        </a>
+
+        <div class="page-title">
+            <h2>Мої проекти</h2>
+            <p>Ось збірка моїх робіт у веб-розробці, дизайні та програмуванні</p>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="M21 21l-4.35-4.35"></path>
+                </svg>
+                <input type="text" id="searchInput" placeholder="Пошук проектів...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Всі</button>
+                <button class="filter-btn" data-filter="web">Веб</button>
+                <button class="filter-btn" data-filter="mobile">Мобільні</button>
+                <button class="filter-btn" data-filter="design">Дизайн</button>
+                <button class="filter-btn" data-filter="game">Ігри</button>
+            </div>
+        </div>
+
+        <div class="projects-container" id="projectsContainer"><!-- JS --></div>
+
+        <div class="social-container">
+            <ul class="social">
+                <li>
+                    <a href="https://github.com/xxandev"><img src="styles/ico-white/github.png"></a>
+                </li>
+                <li>
+                    <a href="https://xxandev.github.io"><img src="styles/ico-white/xxandev.png"></a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/channel/UCASgdzzKxwaxUdtDS1HOkyA"><img src="styles/ico-white/youtube.png"></a>
+                </li>
+                <li>
+                    <a href="/"><img src="styles/ico-white/telegram.png"></a>
+                </li>
+            </ul>
+        </div>
+
+        <button class="scroll-to-top" aria-label="До початку сторінки">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6" />
+            </svg>
+        </button>
+    </section>
+
+
 </body>
 
 </html>
