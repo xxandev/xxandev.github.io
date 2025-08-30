@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/styles/logo/logo-mini.png" />
+    <link rel="stylesheet" href="styles/index.css">
+    <script src="js/main.js"></script>
+    <title>Password Generator</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Генератор паролів</h1>
+            <p>Створюйте безпечні паролі одним кліком</p>
+        </header>
+
+        <div class="settings-panel">
+            <div class="setting-group">
+                <label for="length">Довжина пароля: <span id="length-value" class="range-value">12</span>
+                    символів</label>
+                <input type="range" id="length" min="6" max="30" value="12">
+            </div>
+
+            <div class="setting-group">
+                <label>Включити:</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="uppercase" checked>
+                        <label for="uppercase">Великі літери (A-Z)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="lowercase" checked>
+                        <label for="lowercase">Малі літери (a-z)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="numbers" checked>
+                        <label for="numbers">Цифри (0-9)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="symbols">
+                        <label for="symbols">Спецсимволи (!@#$%)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="exclude-similar">
+                    <label for="exclude-similar">Виключити схожі символи (0, O, o, L, l, i, 1, I)</label>
+                </div>
+            </div>
+
+            <button id="generate">Згенерувати паролі</button>
+        </div>
+
+        <div class="passwords-container" id="passwords">
+            <!-- Паролі будуть додані сюди -->
+        </div>
+
+        <div class="social-container">
+            <ul class="social">
+                <li><a href="https://github.com/xxandev"><img src="/styles/ico-white/github.png"></a></li>
+                <li><a href="https://xxandev.github.io"><img src="/styles/ico-white/xxandev.png"></a></li>
+                <li><a href="https://www.youtube.com/channel/UCASgdzzKxwaxUdtDS1HOkyA"><img src="/styles/ico-white/youtube.png"></a></li>
+                <li><a href="/"><img src="/styles/ico-white/telegram.png"></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="copy-notification" id="copy-notification">Пароль скопійовано!</div>
+
+
+</body>
+
+</html>

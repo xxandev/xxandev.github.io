@@ -1,0 +1,108 @@
+{
+  "images": [
+    {
+      "url": "https://picsum.photos/600/400?random=1",
+      "title": "Приклад зображення 1"
+    },
+    {
+      "url": "https://picsum.photos/600/400?random=2",
+      "title": "Приклад зображення 2"
+    },
+    {
+      "url": "https://picsum.photos/600/400?random=3",
+      "title": "Приклад зображення 3"
+    },
+    {
+      "url": "https://picsum.photos/600/400?random=4",
+      "title": "Приклад зображення 4"
+    },
+    {
+      "url": "images/wp (0).jpg",
+      "title": "Приклад зображення 5"
+    },
+    {
+      "url": "images/wp (1).png",
+      "title": "Приклад зображення 6"
+    },
+    {
+      "url": "images/wp (2).png",
+      "title": "Приклад зображення 7"
+    },
+    {
+      "url": "images/wp (3).jpg",
+      "title": "Приклад зображення 8"
+    },
+    {
+      "url": "images/wp (4).jpg",
+      "title": "Приклад зображення 9"
+    },
+    {
+      "url": "images/wp (5).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (6).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (7).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (8).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (9).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (10).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (11).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (12).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (13).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (14).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (15).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (15).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (16).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (17).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (18).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (19).jpg",
+      "title": "Приклад зображення 10"
+    },
+    {
+      "url": "images/wp (20).jpg",
+      "title": "Приклад зображення 10"
+    }
+  ]
+}

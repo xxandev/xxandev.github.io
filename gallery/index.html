@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/styles/logo/logo-mini.png" />
+    <link rel="stylesheet" href="styles/index.css">
+    <script src="js/main.js"></script>
+    <title>Gallery</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="home-btn">Home</a>
+            <h1>Gallery</h1>
+        </header>
+
+        <div class="gallery" id="gallery">
+            <div class="no-images">
+                <h2>Завантаження зображень...</h2>
+                <p>Будь ласка, зачекайте, йде завантаження галереї.</p>
+            </div>
+        </div>
+
+        <div class="social-container">
+            <ul class="social">
+                <li><a href="https://github.com/xxandev"><img src="/styles/ico-white/github.png"></a></li>
+                <li><a href="https://xxandev.github.io"><img src="/styles/ico-white/xxandev.png"></a></li>
+                <li><a href="https://www.youtube.com/channel/UCASgdzzKxwaxUdtDS1HOkyA"><img src="/styles/ico-white/youtube.png"></a></li>
+                <li><a href="/"><img src="/styles/ico-white/telegram.png"></a></li>
+            </ul>
+        </div>
+
+        <!-- <footer></footer> -->
+    </div>
+
+    <div class="modal" id="modal">
+        <span class="close" id="close">&times;</span>
+        <div class="zoom-info" id="zoom-info">100%</div>
+        <div class="navigation">
+            <button class="nav-btn" id="prev-btn">&lt;</button>
+            <button class="nav-btn" id="next-btn">&gt;</button>
+        </div>
+        <div class="modal-content-container" id="modal-container">
+            <img class="modal-content" id="modal-img">
+        </div>
+        <div class="caption" id="caption"></div>
+    </div>
+</body>
+
+</html>
