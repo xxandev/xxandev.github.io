@@ -5,9 +5,327 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/styles/logo/logo-mini.png" />
-    <link rel="stylesheet" href="styles/index.css">
-    <script src="js/main.js"></script>
     <title>Transliteration UA2EN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Світла тема (за замовчуванням) */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        /* Шапка */
+        header {
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+            color: #ffce54;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .home-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        .transliteration-area {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-section,
+        .output-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 180px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.8em;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #4b6cb7;
+        }
+
+        #intext {
+            background: #f9f9f9;
+        }
+
+        #outtext {
+            background: #f0f4ff;
+        }
+
+        .label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #4b6cb7;
+        }
+
+        .label-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #4b6cb7;
+            color: white;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+
+        .info {
+            background: #e8f4ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .info h3 {
+            color: #2c5282;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info ul {
+            list-style: none;
+            padding-left: 5px;
+        }
+
+        .info li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info li:before {
+            content: "•";
+            color: #4b6cb7;
+            font-weight: bold;
+        }
+
+        /* Соціальні посилання */
+        .social-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .social {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            padding: 0;
+        }
+
+        .social li a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .social li a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .social li a img {
+            width: 26px;
+            height: 26px;
+            filter: brightness(0.9);
+            transition: filter 0.3s ease;
+        }
+
+        .social li a:hover img {
+            filter: brightness(1.2);
+        }
+
+        /* Темна тема */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+                color: #e6e6e6;
+            }
+
+            .container {
+                background: #0f3460;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+
+            header {
+                background: linear-gradient(90deg, #4b6cb7 0%, #0f3460 100%);
+            }
+
+            textarea {
+                border-color: #2a2a3a;
+                color: #e6e6e6;
+                background: #1e2a4a;
+            }
+
+            textarea:focus {
+                border-color: #4b6cb7;
+            }
+
+            #intext {
+                background: #1e2a4a;
+            }
+
+            #outtext {
+                background: #1e3a6a;
+            }
+
+            .label {
+                color: #8bb4ff;
+            }
+
+            .label-icon {
+                background: #8bb4ff;
+                color: #0f3460;
+            }
+
+            .info {
+                background: #1e2a4a;
+                border: 1px solid #2a2a3a;
+            }
+
+            .info h3 {
+                color: #8bb4ff;
+            }
+
+            .info li {
+                color: #b8b8b8;
+            }
+
+            .info li:before {
+                color: #8bb4ff;
+            }
+
+            .social-container {
+                border-top: 1px solid #2a2a3a;
+            }
+
+            .social li a {
+                background: rgba(40, 40, 60, 0.7);
+                border: 1px solid rgba(100, 150, 255, 0.3);
+            }
+
+            .social li a:hover {
+                background: rgba(60, 90, 200, 0.9);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .logo {
+                justify-content: center;
+            }
+
+            textarea {
+                min-height: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 18px;
+            }
+
+            .home-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            main {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -27,7 +345,8 @@
                         <div class="label-icon">T</div>
                         <span>Введіть текст українською:</span>
                     </div>
-                    <textarea id="intext" placeholder="Введіть текст для транслітерації..." oninput="transliterate()"></textarea>
+                    <textarea id="intext" placeholder="Введіть текст для транслітерації..."
+                        oninput="transliterate()"></textarea>
                 </div>
 
                 <div class="output-section">
@@ -40,7 +359,9 @@
             </div>
 
             <div class="info">
-                <h3><div class="label-icon">i</div>Як це працює?</h3>
+                <h3>
+                    <div class="label-icon">i</div>Як це працює?
+                </h3>
                 <ul>
                     <li>Введіть текст українською мовою у верхнє поле</li>
                     <li>Транслітерація відбувається автоматично в реальному часі</li>
@@ -62,5 +383,113 @@
         </div>
     </footer>
 </body>
+<script>
+    function transliterate() {
+        let intext = document.getElementById('intext').value.trim();
+
+        const exceptions = {
+            'Київ': 'Kyiv',
+            'Харків': 'Kharkiv',
+            'Луганськ': 'Luhansk',
+            'Запоріжжя': 'Zaporizhzhia',
+            'Одеса': 'Odesa',
+            'Ужгород': 'Uzhhorod',
+            'Херсон': 'Kherson',
+            'Чернігів': 'Chernihiv',
+            'Житомир': 'Zhytomyr',
+            'Полтава': 'Poltava',
+            'Дніпро': 'Dnipro',
+            'Донецьк': 'Donetsk',
+            'київ': 'kyiv',
+            'харків': 'kharkiv',
+            'луганськ': 'luhansk',
+            'запоріжжя': 'zaporizhzhia',
+            'одеса': 'odesa',
+            'ужгород': 'uzhhorod',
+            'херсон': 'kherson',
+            'чернігів': 'chernihiv',
+            'житомир': 'zhytomyr',
+            'полтава': 'poltava',
+            'дніпро': 'dnipro',
+            'донецьк': 'donetsk',
+            'КИЇВ': 'KYIV',
+            'ХАРКІВ': 'KHARKIV',
+            'ЛУГАНСЬК': 'LUHANSK',
+            'ЗАПОРІЖЖЯ': 'ZAPORIZHZHIA',
+            'ОДЕСА': 'ODESA',
+            'УЖГОРОД': 'UZHHOROD',
+            'ХЕРСОН': 'KHERSON',
+            'ЧЕРНІГІВ': 'CHERNIHIV',
+            'ЖИТОМИР': 'ZHYTOMYR',
+            'ПОЛТАВА': 'POLTAVA',
+            'ДНІПРО': 'DNIPRO',
+            'ДОНЕЦЬК': 'DONETSK'
+        };
+
+        if (exceptions[intext]) {
+            document.getElementById('outtext').value = exceptions[intext];
+            return;
+        }
+        const baseMap = {
+            'а': 'a', 'б': 'b', 'в': 'v', 'г': 'h', 'ґ': 'g', 'д': 'd', 'е': 'e',
+            'ж': 'zh', 'з': 'z', 'и': 'y', 'і': 'i', 'к': 'k', 'л': 'l', 'м': 'm',
+            'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
+            'ф': 'f', 'х': 'kh', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch',
+            'ь': '', 'ъ': '', 'ы': 'y', 'ё': 'jo',
+            'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'H', 'Ґ': 'G', 'Д': 'D', 'Е': 'E',
+            'Ж': 'Zh', 'З': 'Z', 'И': 'Y', 'І': 'I', 'К': 'K', 'Л': 'L', 'М': 'M',
+            'Н': 'N', 'О': 'O', 'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U',
+            'Ф': 'F', 'Х': 'Kh', 'Ц': 'Ts', 'Ч': 'Ch', 'Ш': 'Sh', 'Щ': 'Shch',
+            'Ь': '', 'Ъ': '', 'Ы': 'Y', 'Ё': 'Jo'
+        };
+
+        const specialMap = {
+            'є': { start: 'ye', middle: 'ie' },
+            'ї': { start: 'yi', middle: 'i' },
+            'й': { start: 'y', middle: 'i' },
+            'ю': { start: 'yu', middle: 'iu' },
+            'я': { start: 'ya', middle: 'ia' },
+
+            'Є': { start: 'Ye', middle: 'Ie' },
+            'Ї': { start: 'Yi', middle: 'I' },
+            'Й': { start: 'Y', middle: 'I' },
+            'Ю': { start: 'Yu', middle: 'Iu' },
+            'Я': { start: 'Ya', middle: 'Ia' }
+        };
+
+        const vowels = /[аеєиіїоуюяАЕЄИІЇОУЮЯ]/;
+        const boundary = /[\s'’"-]/;
+
+        let outtext = "";
+        for (let i = 0; i < intext.length; i++) {
+            let char = intext[i];
+
+            if (specialMap[char]) {
+                let prev = i === 0 ? "" : intext[i - 1];
+                if (i === 0 || boundary.test(prev) || vowels.test(prev)) {
+                    outtext += specialMap[char].start;
+                } else {
+                    outtext += specialMap[char].middle;
+                }
+            } else {
+                outtext += baseMap[char] !== undefined ? baseMap[char] : char;
+            }
+        }
+        document.getElementById('outtext').value = outtext;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const outtext = document.getElementById("outtext");
+        outtext.addEventListener("click", function () {
+            if (!outtext.value.trim()) return;
+            navigator.clipboard.writeText(outtext.value).then(() => {
+                outtext.style.color = "green";
+                setTimeout(() => { outtext.style.color = ""; }, 1000);
+            }).catch(err => {
+                console.error("Помилка копіювання:", err);
+            });
+        });
+    });
+</script>
 
 </html>

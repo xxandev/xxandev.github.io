@@ -5,9 +5,226 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/styles/logo/logo-mini.png" />
-    <link rel="stylesheet" href="styles/index.css">
-    <script src="js/main.js"></script>
+    <!-- <link rel="stylesheet" href="styles/index.css">
+    <script src="js/main.js"></script> -->
     <title>Password Generator</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --accent-color: #2196f3;
+            --accent-hover: #1e88e5;
+            --border-color: #333;
+            --success-color: #4caf50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .settings-panel {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .setting-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            margin-top: 5px;
+            accent-color: var(--accent-color);
+        }
+
+        .range-value {
+            display: inline-block;
+            width: 40px;
+            text-align: right;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-item input {
+            margin-right: 5px;
+            accent-color: var(--accent-color);
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .passwords-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .password-item {
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+            min-height: 60px;
+        }
+
+        .password-item:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .password-text {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            word-break: break-all;
+        }
+
+        .copy-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--success-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+        }
+
+        /* Соціальні посилання */
+        .social-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            border-top: 1px solid #2a2a3a;
+        }
+
+        .social {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            padding: 0;
+        }
+
+        .social li a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(40, 40, 60, 0.7);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(100, 150, 255, 0.3);
+        }
+
+        .social li a:hover {
+            background: rgba(60, 90, 200, 0.9);
+            transform: translateY(-5px);
+        }
+
+        .social li a img {
+            width: 26px;
+            height: 26px;
+            filter: brightness(0.9);
+            transition: filter 0.3s ease;
+        }
+
+        .social li a:hover img {
+            filter: brightness(1.2);
+        }
+
+        @media (max-width: 600px) {
+            .passwords-container {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-group {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .social {
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -16,14 +233,12 @@
             <h1>Генератор паролів</h1>
             <p>Створюйте безпечні паролі одним кліком</p>
         </header>
-
         <div class="settings-panel">
             <div class="setting-group">
                 <label for="length">Довжина пароля: <span id="length-value" class="range-value">12</span>
                     символів</label>
                 <input type="range" id="length" min="6" max="30" value="12">
             </div>
-
             <div class="setting-group">
                 <label>Включити:</label>
                 <div class="checkbox-group">
@@ -45,21 +260,15 @@
                     </div>
                 </div>
             </div>
-
             <div class="setting-group">
                 <div class="checkbox-item">
                     <input type="checkbox" id="exclude-similar">
                     <label for="exclude-similar">Виключити схожі символи (0, O, o, L, l, i, 1, I)</label>
                 </div>
             </div>
-
             <button id="generate">Згенерувати паролі</button>
         </div>
-
-        <div class="passwords-container" id="passwords">
-            <!-- Паролі будуть додані сюди -->
-        </div>
-
+        <div class="passwords-container" id="passwords"><!-- pass --></div>
         <div class="social-container">
             <ul class="social">
                 <li><a href="https://github.com/xxandev"><img src="/styles/ico-white/github.png"></a></li>
@@ -69,10 +278,139 @@
             </ul>
         </div>
     </div>
-
     <div class="copy-notification" id="copy-notification">Пароль скопійовано!</div>
-
-
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const lengthSlider = document.getElementById('length');
+        const lengthValue = document.getElementById('length-value');
+        const uppercaseCheckbox = document.getElementById('uppercase');
+        const lowercaseCheckbox = document.getElementById('lowercase');
+        const numbersCheckbox = document.getElementById('numbers');
+        const symbolsCheckbox = document.getElementById('symbols');
+        const excludeSimilarCheckbox = document.getElementById('exclude-similar');
+        const generateButton = document.getElementById('generate');
+        const passwordsContainer = document.getElementById('passwords');
+        const copyNotification = document.getElementById('copy-notification');
+
+        // Оновлення значення довжини пароля
+        lengthSlider.addEventListener('input', function () {
+            lengthValue.textContent = this.value;
+        });
+
+        // Генерація паролів
+        generateButton.addEventListener('click', function () {
+            const length = parseInt(lengthSlider.value);
+            const includeUppercase = uppercaseCheckbox.checked;
+            const includeLowercase = lowercaseCheckbox.checked;
+            const includeNumbers = numbersCheckbox.checked;
+            const includeSymbols = symbolsCheckbox.checked;
+            const excludeSimilar = excludeSimilarCheckbox.checked;
+
+            // Перевірка, що хоча б один параметр вибрано
+            if (!includeUppercase && !includeLowercase && !includeNumbers && !includeSymbols) {
+                alert('Будь ласка, виберіть хоча б один тип символів');
+                return;
+            }
+
+            // Генерація 10 паролів
+            passwordsContainer.innerHTML = '';
+            for (let i = 0; i < 10; i++) {
+                const password = generatePassword(length, includeUppercase, includeLowercase, includeNumbers, includeSymbols, excludeSimilar);
+                const passwordElement = document.createElement('div');
+                passwordElement.className = 'password-item';
+                passwordElement.innerHTML = `<span class="password-text">${password}</span>`;
+
+                // Додавання функціоналу копіювання
+                passwordElement.addEventListener('click', function () {
+                    copyToClipboard(password);
+                    showNotification();
+                });
+
+                passwordsContainer.appendChild(passwordElement);
+            }
+        });
+
+        // Функція генерації пароля
+        function generatePassword(length, uppercase, lowercase, numbers, symbols, excludeSimilar) {
+            let uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+            let numberChars = '0123456789';
+            // let symbolChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+            let symbolChars = '!@#$^&*()_+-=[]{}|';
+
+            // Вилучення схожих символів, якщо потрібно
+            if (excludeSimilar) {
+                uppercaseChars = uppercaseChars.replace(/[OIL]/g, '');
+                lowercaseChars = lowercaseChars.replace(/[oil1]/g, '');
+                numberChars = numberChars.replace(/[01]/g, '');
+            }
+
+            let allowedChars = '';
+            let password = '';
+
+            if (uppercase && uppercaseChars.length > 0) allowedChars += uppercaseChars;
+            if (lowercase && lowercaseChars.length > 0) allowedChars += lowercaseChars;
+            if (numbers && numberChars.length > 0) allowedChars += numberChars;
+            if (symbols && symbolChars.length > 0) allowedChars += symbolChars;
+
+            // Перевірка, чи є доступні символи
+            if (allowedChars.length === 0) {
+                return "Оберіть хоча б один тип символів";
+            }
+
+            // Гарантуємо, що пароль містить хоча б один символ з кожного обраного типу
+            const requiredChars = [];
+            if (uppercase && uppercaseChars.length > 0) requiredChars.push(uppercaseChars);
+            if (lowercase && lowercaseChars.length > 0) requiredChars.push(lowercaseChars);
+            if (numbers && numberChars.length > 0) requiredChars.push(numberChars);
+            if (symbols && symbolChars.length > 0) requiredChars.push(symbolChars);
+
+            // Додаємо по одному символу з кожного обов'язкового типу
+            for (const chars of requiredChars) {
+                password += chars[Math.floor(Math.random() * chars.length)];
+            }
+
+            // Додаємо випадкові символи до потрібної довжини
+            for (let i = password.length; i < length; i++) {
+                password += allowedChars[Math.floor(Math.random() * allowedChars.length)];
+            }
+
+            // Перемішуємо символи у паролі
+            return shuffleString(password);
+        }
+
+        // Функція для перемішування символів у рядку
+        function shuffleString(string) {
+            const array = string.split('');
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array.join('');
+        }
+
+        // Функція копіювання в буфер обміну
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+
+        // Показати сповіщення про копіювання
+        function showNotification() {
+            copyNotification.classList.add('show');
+            setTimeout(() => {
+                copyNotification.classList.remove('show');
+            }, 2000);
+        }
+
+        // Згенерувати паролі при завантаженні сторінки
+        generateButton.click();
+    });
+</script>
 
 </html>
