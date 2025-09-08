@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="styles/logo/logo-mini.png" />
+    <title>XXanDev</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #000;
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            color: #fff;
+        }
+
+        /* Контейнер для основного контенту */
+        .content-container {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 60px;
+            z-index: 10;
+        }
+
+        /* Контейнер для сфери - права половина екрану */
+        .sphere-section {
+            width: 50%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Стилі для анімації сфери */
+        .sphere-animation {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            max-width: 550px;
+            max-height: 550px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sphere {
+            width: 100%;
+            height: 100%;
+            filter: contrast(1.4) brightness(1.2);
+        }
+
+        .sphere path {
+            fill: url(#sphereGradient);
+            stroke-width: 2.5px;
+            stroke: rgba(50, 100, 255, 0);
+            backface-visibility: hidden;
+            transition: all 0.8s ease;
+        }
+
+        @media (min-width: 500px) {
+            .sphere path {
+                stroke-width: 2.2px;
+            }
+        }
+
+        /* Основні стилі контенту */
+        .text {
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+        }
+
+        .text h3 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(0, 100, 255, 0.7);
+        }
+
+        .text p {
+            font-size: 1.4em;
+            color: #e0e0ff;
+            margin: 25px 0;
+            font-weight: 300;
+            line-height: 1.6;
+            text-shadow: 0 0 10px rgba(50, 100, 255, 0.5);
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .text a {
+            display: inline-block;
+            width: 220px;
+            font-size: 1.1em;
+            background: rgba(0, 100, 255, 0.8);
+            padding: 14px 30px;
+            text-decoration: none;
+            font-weight: 500;
+            color: #fff;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            border-radius: 30px;
+            box-shadow: 0 0 20px rgba(0, 100, 255, 0.6);
+            text-align: center;
+            border: 2px solid rgba(50, 150, 255, 0.5);
+        }
+
+        .text a:hover {
+            letter-spacing: 2.5px;
+            background: rgba(0, 100, 255, 0.9);
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(0, 100, 255, 0.8);
+        }
+
+        .social {
+            position: absolute;
+            z-index: 10;
+            bottom: 40px;
+            left: 60px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .social li {
+            list-style: none;
+        }
+
+        .social li a {
+            display: inline-block;
+            transform: scale(0.7);
+            transition: 0.5s;
+            filter: drop-shadow(0 0 10px rgba(0, 100, 255, 0.7));
+        }
+
+        .social li a:hover {
+            transform: scale(0.85) translateY(-8px);
+        }
+
+        /* Адаптація для мобільних пристроїв */
+        @media (max-width: 991px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .content-container {
+                width: 100%;
+                padding: 40px 30px;
+                height: 50%;
+            }
+            
+            .sphere-section {
+                width: 100%;
+                height: 50%;
+            }
+            
+            .sphere-animation {
+                width: 80%;
+                height: 80%;
+            }
+            
+            .text h3 {
+                font-size: 2.5em;
+            }
+            
+            .text p {
+                font-size: 1.2em;
+            }
+            
+            .text a {
+                font-size: 1em;
+                padding: 12px 25px;
+                width: 200px;
+            }
+            
+            .social {
+                position: relative;
+                bottom: 0;
+                left: 0;
+                margin-top: 40px;
+                justify-content: center;
+            }
+        }
+
+        /* Зоряне небо */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle linear infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        /* Декоративні елементи */
+        .decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(0, 100, 255, 0.2);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Зоряне небо -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Декоративні частинки -->
+    <div class="decoration" id="particles"></div>
+
+    <!-- Контейнер для основного контенту -->
+    <div class="content-container">
+        <div class="text">
+            <h3>Dev House</h3>
+            <p>Welcome to my creative development space where ideas come to life through code and innovation.</p>
+            <div class="buttons">
+                <a href="/menu.html">Explore Projects</a>
+                <a href="https://github.com/xxandev">View GitHub</a>
+            </div>
+        </div>
+        <ul class="social">
+            <li><a href="https://github.com/xxandev"><img src="/styles/ico-white/github.png"></a></li>
+            <li><a href="https://xxandev.github.io"><img src="/styles/ico-white/xxandev.png"></a></li>
+            <li><a href="https://www.youtube.com/channel/UCASgdzzKxwaxUdtDS1HOkyA"><img src="/styles/ico-white/youtube.png"></a></li>
+            <li><a href="/"><img src="/styles/ico-white/telegram.png"></a></li>
+        </ul>
+    </div>
+    <div class="sphere-section">
+        <div class="sphere-animation" id="sphere-container">
+            <svg class="sphere" viewBox="0 0 440 440" stroke="rgba(50,100,255,0)">
+                <defs>
+                    <linearGradient id="sphereGradient" x1="5%" x2="5%" y1="0%" y2="15%">
+                        <stop stop-color="#373734" offset="0%"/>
+                        <stop stop-color="#242423" offset="50%"/>
+                        <stop stop-color="#0D0D0C" offset="100%"/>
+                    </linearGradient>
+                </defs>
+                <path d="M361.604 361.238c-24.407 24.408-51.119 37.27-59.662 28.727-8.542-8.543 4.319-35.255 28.726-59.663 24.408-24.407 51.12-37.269 59.663-28.726 8.542 8.543-4.319 35.255-28.727 59.662z"/>
+                <path d="M360.72 360.354c-35.879 35.88-75.254 54.677-87.946 41.985-12.692-12.692 6.105-52.067 41.985-87.947 35.879-35.879 75.254-54.676 87.946-41.984 12.692 12.692-6.105 52.067-41.984 87.946z"/>
+                <path d="M357.185 356.819c-44.91 44.91-94.376 68.258-110.485 52.149-16.11-16.11 7.238-65.575 52.149-110.485 44.91-44.91 94.376-68.259 110.485-52.15 16.11 16.11-7.239 65.576-52.149 110.486z"/>
+                <path d="M350.998 350.632c-53.21 53.209-111.579 81.107-130.373 62.313-18.794-18.793 9.105-77.163 62.314-130.372 53.209-53.21 111.579-81.108 130.373-62.314 18.794 18.794-9.105 77.164-62.314 130.373z"/>
+                <path d="M343.043 342.677c-59.8 59.799-125.292 91.26-146.283 70.268-20.99-20.99 10.47-86.483 70.269-146.282 59.799-59.8 125.292-91.26 146.283-70.269 20.99 20.99-10.47 86.484-70.27 146.283z"/>
+                <path d="M334.646 334.28c-65.169 65.169-136.697 99.3-159.762 76.235-23.065-23.066 11.066-94.593 76.235-159.762s136.697-99.3 159.762-76.235c23.065 23.065-11.066 94.593-76.235 159.762z"/>
+                <path d="M324.923 324.557c-69.806 69.806-146.38 106.411-171.031 81.76-24.652-24.652 11.953-101.226 81.759-171.032 69.806-69.806 146.38-106.411 171.031-81.76 24.652 24.653-11.953 101.226-81.759 171.032z"/>
+                <path d="M312.99 312.625c-73.222 73.223-153.555 111.609-179.428 85.736-25.872-25.872 12.514-106.205 85.737-179.428s153.556-111.609 179.429-85.737c25.872 25.873-12.514 106.205-85.737 179.429z"/>
+                <path d="M300.175 299.808c-75.909 75.909-159.11 115.778-185.837 89.052-26.726-26.727 13.143-109.929 89.051-185.837 75.908-75.908 159.11-115.778 185.837-89.051 26.726 26.726-13.143 109.928-89.051 185.836z"/>
+                <path d="M284.707 284.34c-77.617 77.617-162.303 118.773-189.152 91.924-26.848-26.848 14.308-111.534 91.924-189.15C265.096 109.496 349.782 68.34 376.63 95.188c26.849 26.849-14.307 111.535-91.923 189.151z"/>
+                <path d="M269.239 267.989c-78.105 78.104-163.187 119.656-190.035 92.807-26.849-26.848 14.703-111.93 92.807-190.035 78.105-78.104 163.187-119.656 190.035-92.807 26.849 26.848-14.703 111.93-92.807 190.035z"/>
+                <path d="M252.887 252.52C175.27 330.138 90.584 371.294 63.736 344.446 36.887 317.596 78.043 232.91 155.66 155.293 233.276 77.677 317.962 36.521 344.81 63.37c26.85 26.848-14.307 111.534-91.923 189.15z"/>
+                <path d="M236.977 236.61C161.069 312.52 77.867 352.389 51.14 325.663c-26.726-26.727 13.143-109.928 89.052-185.837 75.908-75.908 159.11-115.777 185.836-89.05 26.727 26.726-13.143 109.928-89.051 185.836z"/>
+                <path d="M221.067 220.7C147.844 293.925 67.51 332.31 41.639 306.439c-25.873-25.873 12.513-106.206 85.736-179.429C200.6 53.786 280.931 15.4 306.804 41.272c25.872 25.873-12.514 106.206-85.737 179.429x"/>
+                <path d="M205.157 204.79c-69.806 69.807-146.38 106.412-171.031 81.76-24.652-24.652 11.953-101.225 81.759-171.031 69.806-69.807 146.38-106.411 171.031-81.76 24.652 24.652-11.953 101.226-81.759 171.032z"/>
+                <path d="M189.247 188.881c-65.169 65.169-136.696 99.3-159.762 76.235-23.065-23.065 11.066-94.593 76.235-159.762s136.697-99.3 159.762-76.235c23.065 23.065-11.066 94.593-76.235 159.762z"/>
+                <path d="M173.337 172.971c-59.799 59.8-125.292 91.26-146.282 70.269-20.99-20.99 10.47-86.484 70.268-146.283 59.8-59.799 125.292-91.26 146.283-70.269 20.99 20.991-10.47 86.484-70.269 146.283x"/>
+                <path d="M157.427 157.061c-53.209 53.21-111.578 81.108-130.372 62.314-18.794-18.794 9.104-77.164 62.313-130.373 53.21-53.209 111.58-81.108 130.373-62.314 18.794 18.794-9.105 77.164-62.314 130.373z"/>
+                <path d="M141.517 141.151c-44.91 44.91-94.376 68.259-110.485 52.15-16.11-16.11 7.239-65.576 52.15-110.486 44.91-44.91 94.375-68.258 110.485-52.15 16.109 16.11-7.24 65.576-52.15 110.486z"/>
+                <path d="M125.608 125.241c-35.88 35.88-75.255 54.677-87.947 41.985-12.692-12.692 6.105-52.067 41.985-87.947C115.525 43.4 154.9 24.603 167.592 37.295c12.692 12.692-6.105 52.067-41.984 87.946z"/>
+                <path d="M109.698 109.332c-24.408 24.407-51.12 37.268-59.663 28.726-8.542-8.543 4.319-35.255 28.727-59.662 24.407-24.408 51.12-37.27 59.662-28.727 8.543 8.543-4.319 35.255-28.726 59.663z"/>
+            </svg>
+        </div>
+    </div>
+
+    <script src="/js/lib/animejs/anime.min.js"></script>
+    <script>
+        // Функція для створення зірок
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 200;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                const size = Math.random() * 3;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const opacity = Math.random() * 0.7 + 0.3;
+                const duration = Math.random() * 5 + 3;
+                const delay = Math.random() * 5;
+                
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${posX}%`;
+                star.style.top = `${posY}%`;
+                star.style.opacity = opacity;
+                star.style.animationDuration = `${duration}s`;
+                star.style.animationDelay = `${delay}s`;
+                
+                if (Math.random() > 0.7) {
+                    star.style.boxShadow = `0 0 ${size * 2}px rgba(255, 255, 255, 0.8)`;
+                }
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Функція для створення частинок
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 15 + 5;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const opacity = Math.random() * 0.2 + 0.05;
+                const delay = Math.random() * 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.opacity = opacity;
+                particle.style.animation = `float ${15 + delay}s infinite ease-in-out`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Функція для оновлення градієнта на основі позиції курсора
+        function updateGradientPosition(x, y) {
+            const sphere = document.querySelector('.sphere');
+            const rect = sphere.getBoundingClientRect();
+            
+            const xPercent = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
+            const yPercent = Math.max(0, Math.min(100, ((y - rect.top) / rect.height) * 100));
+            
+            const gradient = document.getElementById('sphereGradient');
+            gradient.setAttribute('x1', `${xPercent}%`);
+            gradient.setAttribute('x2', `${xPercent}%`);
+            gradient.setAttribute('y1', `${yPercent}%`);
+            gradient.setAttribute('y2', `${yPercent + 15}%`);
+        }
+
+        // Ініціалізація анімації сфери
+        var sphereAnimation = (function() {
+            var sphereEl = document.querySelector('.sphere-animation');
+            var spherePathEls = sphereEl.querySelectorAll('.sphere path');
+            var pathLength = spherePathEls.length;
+            
+            // Анімація для появи/зникнення ліній
+            var lineAnimations = [];
+            
+            for (var i = 0; i < pathLength; i++) {
+                lineAnimations.push(anime({
+                    targets: spherePathEls[i],
+                    stroke: [
+                        {value: 'rgba(50, 100, 255, 0)', duration: 0},
+                        {value: 'rgba(0, 150, 255, 0.9)', duration: 1500, delay: i * 80},
+                        {value: 'rgba(50, 100, 255, 0)', duration: 1500, delay: 500}
+                    ],
+                    easing: 'easeInOutSine',
+                    loop: true,
+                    autoplay: true
+                }));
+            }
+
+            // Анімація руху ліній
+            var breathAnimation = anime({
+                begin: function() {
+                    for (var i = 0; i < pathLength; i++) {
+                        anime({
+                            targets: spherePathEls[i],
+                            translateX: [2, -4],
+                            translateY: [2, -4],
+                            easing: 'easeInOutSine',
+                            duration: 2000,
+                            delay: i * 50,
+                            loop: true,
+                            autoplay: true
+                        });
+                    }
+                },
+                duration: Infinity,
+                autoplay: true
+            });
+
+            var shadowAnimation = anime({
+                targets: '#sphereGradient',
+                x1: '5%',
+                x2: '5%',
+                y1: '0%',
+                y2: '15%',
+                duration: 35000,
+                easing: 'easeInOutQuint',
+                loop: true,
+                autoplay: true
+            });
+        })();
+
+        // Додаємо обробники подій для інтерактивності
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            createParticles();
+            
+            const sphereContainer = document.getElementById('sphere-container');
+            sphereContainer.style.pointerEvents = 'auto';
+            
+            sphereContainer.addEventListener('mousemove', function(e) {
+                updateGradientPosition(e.clientX, e.clientY);
+            });
+            
+            sphereContainer.addEventListener('mouseleave', function() {
+                const gradient = document.getElementById('sphereGradient');
+                gradient.setAttribute('x1', '5%');
+                gradient.setAttribute('x2', '5%');
+                gradient.setAttribute('y1', '0%');
+                gradient.setAttribute('y2', '15%');
+            });
+        });
+
+        // Додаємо CSS анімацію для частинок
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0) translateX(0); }
+                25% { transform: translateY(-20px) translateX(10px); }
+                50% { transform: translateY(-10px) translateX(20px); }
+                75% { transform: translateY(10px) translateX(10px); }
+            }
+            
+            /* Анімація для пульсації ліній */
+            @keyframes linePulse {
+                0%, 100% { 
+                    stroke-width: 2.2px; 
+                    filter: drop-shadow(0 0 2px rgba(0, 150, 255, 0.7));
+                }
+                50% { 
+                    stroke-width: 2.8px; 
+                    filter: drop-shadow(0 0 5px rgba(0, 150, 255, 0.9));
+                }
+            }
+            
+            .sphere path {
+                animation: linePulse 3s ease-in-out infinite;
+            }
+            
+            .sphere path:nth-child(2n) {
+                animation-delay: 0.5s;
+            }
+            
+            .sphere path:nth-child(3n) {
+                animation-delay: 1s;
+            }
+            
+            .sphere path:nth-child(4n) {
+                animation-delay: 1.5s;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>
